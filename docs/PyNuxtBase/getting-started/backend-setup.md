@@ -56,7 +56,7 @@ python main.py
 The server will start at:
 - **API**: http://localhost:8000/api
 - **API Docs**: http://localhost:8000/api/docs
-- **Django Admin**: http://localhost:8000/cp/admin
+- **Django Admin**: http://localhost:8000/cp
 
 ## Next Steps
 

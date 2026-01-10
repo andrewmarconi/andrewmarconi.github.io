@@ -31,9 +31,9 @@ app = FastAPI()
 # Mount FastAPI routes at /api
 app.include_router(api_router, prefix="/api")
 
-# Mount Django WSGI at /cp
+# Mount Django WSGI at /
 django_app = get_wsgi_application()
-app.mount("/cp", ASGIMiddleware(django_app))
+app.mount("/", ASGIMiddleware(django_app))
 
 # Run with Uvicorn
 uvicorn.run(app, host="0.0.0.0", port=8000)
@@ -43,7 +43,7 @@ uvicorn.run(app, host="0.0.0.0", port=8000)
 
 - **Database Models**: Define all models in `app/django_app/apps/*/models.py`
 - **Migrations**: Use `python manage.py migrate` to manage schema
-- **Admin Interface**: Available at `/cp/admin` for data management
+- **Admin Interface**: Available at `/cp` for data management
 - **ORM**: All database queries use Django ORM
 
 ### 3. FastAPI Responsibilities
@@ -64,5 +64,5 @@ Both frameworks share the same PostgreSQL database:
 
 - `/api/*` - FastAPI routes (async REST API)
 - `/api/docs` - OpenAPI documentation
-- `/cp/admin` - Django admin interface
-- `/cp/*` - Django URLs
+- `/cp` - Django admin interface
+- `/*` - Django URLs

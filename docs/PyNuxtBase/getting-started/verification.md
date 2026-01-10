@@ -7,7 +7,7 @@ sidebar_position: 2.4
 ## Test the Backend
 
 1. Visit the API documentation: http://localhost:8000/api/docs
-2. Visit the Django admin: http://localhost:8000/cp/admin (login with superuser credentials)
+2. Visit the Django admin: http://localhost:8000/cp (login with superuser credentials)
 
 ## Test the Frontend
 

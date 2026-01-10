@@ -31,9 +31,9 @@ from app.api.routers import auth, users
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(users.router, prefix="/api/users", tags=["users"])
 
-# Mount Django at /cp
+# Mount Django at /
 django_app = get_wsgi_application()
-app.mount("/cp", ASGIMiddleware(django_app))
+app.mount("/", ASGIMiddleware(django_app))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
@@ -43,5 +43,5 @@ if __name__ == "__main__":
 
 - `/api/*` - FastAPI routes (async REST API)
 - `/api/docs` - OpenAPI documentation
-- `/cp/admin` - Django admin interface
-- `/cp/*` - Django URLs
+- `/cp` - Django admin interface
+- `/*` - Django URLs

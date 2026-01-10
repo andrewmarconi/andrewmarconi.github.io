@@ -19,7 +19,7 @@ sidebar_position: 3.1
 ### Backend (Port 8000)
 
 - **FastAPI** - Async REST API at `/api/*`
-- **Django** - Admin and ORM at `/cp/*`
+- **Django** - Admin and ORM at `/*` (admin at `/cp`)
 - **Uvicorn** - ASGI server running both frameworks
 
 ### Database

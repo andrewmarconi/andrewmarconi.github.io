@@ -65,4 +65,4 @@ class UserAdmin(admin.ModelAdmin):
     readonly_fields = ['id', 'created_at', 'updated_at']
 ```
 
-Access admin at: http://localhost:8000/cp/admin
+Access admin at: http://localhost:8000/cp
