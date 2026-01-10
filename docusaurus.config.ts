@@ -52,6 +52,12 @@ const config: Config = {
     ],
   ],
 
+  themes: ['@docusaurus/theme-mermaid'],
+
+  markdown: {
+    mermaid: true,
+  },
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/andrewmarconi-ogimage.jpg',
@@ -116,6 +122,9 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+    },
+    mermaid: {
+      theme: { light: 'neutral', dark: 'dark' },
     },
   } satisfies Preset.ThemeConfig,
 };

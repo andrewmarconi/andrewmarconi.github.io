@@ -1,0 +1,37 @@
+graph TB
+    Client[Client Browser]
+
+    subgraph Frontend["Nuxt 4 Frontend :3000"]
+        Components[Components]
+        Pages[Pages]
+        Layouts[Layouts]
+        Composables[Composables]
+        Store[Pinia Store]
+    end
+
+    subgraph Backend["Python Backend :8000"]
+        subgraph Uvicorn["Uvicorn ASGI Server"]
+            subgraph FastAPI["FastAPI /api/*"]
+                API[REST API]
+                AsyncRoutes[Async Routes]
+                Pydantic[Pydantic Schemas]
+            end
+
+            subgraph Django["Django WSGI /cp/*"]
+                Admin[Admin Interface]
+                ORM[ORM Models]
+                Migrations[Migrations]
+            end
+        end
+    end
+
+    Database[(PostgreSQL 17<br/>:5432)]
+
+    Client -->|HTTP/REST| Frontend
+    Frontend -->|API Calls| FastAPI
+    FastAPI -->|Queries| Database
+    Django -->|Schema Management| Database
+
+    style Frontend fill:#42b883
+    style Backend fill:#3776ab
+    style Database fill:#336791
