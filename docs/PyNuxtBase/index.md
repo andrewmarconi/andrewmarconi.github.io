@@ -6,6 +6,8 @@ sidebar_position: 1
 
 An opinionated, modern, full-stack web application foundation built with **Nuxt 4**, **FastAPI**, and **Django ORM**.
 
+![PyNuxtBase Logo](/img/pynuxtbase-logo.png)
+
 ## Overview
 
 PyNuxtBase provides a production-ready bootstrapping foundation for modern web applications with a unique hybrid backend architecture that combines the best of Django and FastAPI.
