@@ -1,0 +1,10 @@
+{
+  "label": "PyNuxtBase",
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "PyNuxtBase/index"
+  },
+  "collapsible": true,
+  "collapsed": false
+}
