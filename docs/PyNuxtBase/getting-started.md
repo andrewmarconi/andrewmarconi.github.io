@@ -70,6 +70,10 @@ open http://localhost:8025
 
 ## Backend Setup
 
+:::warning Use uv for Python
+PyNuxtBase uses **uv** for Python package management. Do NOT use `pip`, `venv`, or `virtualenv` directly.
+:::
+
 ### 1. Create Python virtual environment
 
 ```bash
