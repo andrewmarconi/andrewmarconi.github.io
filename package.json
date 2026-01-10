@@ -13,7 +13,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "diagrams": "npx mmdc -i diagrams/mermaid/system-overview.mmd -o static/img/diagrams/system-overview.svg && npx mmdc -i diagrams/mermaid/authentication-login-flow.mmd -o static/img/diagrams/authentication-login-flow.svg && npx mmdc -i diagrams/mermaid/authentication-token-refresh.mmd -o static/img/diagrams/authentication-token-refresh.svg"
+    "diagrams": "npx mmdc -i diagrams/mermaid/system-overview.mmd -o static/img/diagrams/system-overview.svg -p mermaid-puppeteer-config.json && npx mmdc -i diagrams/mermaid/authentication-login-flow.mmd -o static/img/diagrams/authentication-login-flow.svg -p mermaid-puppeteer-config.json && npx mmdc -i diagrams/mermaid/authentication-token-refresh.mmd -o static/img/diagrams/authentication-token-refresh.svg -p mermaid-puppeteer-config.json"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
