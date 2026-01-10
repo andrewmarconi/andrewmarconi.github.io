@@ -8,42 +8,44 @@ PyNuxtBase uses a unique **hybrid backend architecture** that combines Django an
 
 ## System Overview
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                         Client (Browser)                     │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    Nuxt 4 Frontend (SSR)                     │
-│                    Port: 3000                                │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │  Components │ Pages │ Layouts │ Composables │ Store  │  │
-│  └──────────────────────────────────────────────────────┘  │
-└──────────────────────────┬──────────────────────────────────┘
-                           │ HTTP/REST
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│          Python Backend (Single Process)                     │
-│                    Port: 8000                                │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │           Uvicorn ASGI Server                        │   │
-│  │  ┌──────────────────┬─────────────────────────────┐ │   │
-│  │  │   FastAPI        │   Django WSGI (a2wsgi)      │ │   │
-│  │  │   /api/*         │   /cp/*                     │ │   │
-│  │  │                  │                             │ │   │
-│  │  │  • REST API      │  • Admin Interface          │ │   │
-│  │  │  • Async Routes  │  • ORM Models               │ │   │
-│  │  │  • Pydantic      │  • Migrations               │ │   │
-│  │  └──────────────────┴─────────────────────────────┘ │   │
-│  └─────────────────────────────────────────────────────┘   │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│              PostgreSQL 17 (Docker)                          │
-│                    Port: 5432                                │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    Client[Client Browser]
+
+    subgraph Frontend["Nuxt 4 Frontend :3000"]
+        Components[Components]
+        Pages[Pages]
+        Layouts[Layouts]
+        Composables[Composables]
+        Store[Pinia Store]
+    end
+
+    subgraph Backend["Python Backend :8000"]
+        subgraph Uvicorn["Uvicorn ASGI Server"]
+            subgraph FastAPI["FastAPI /api/*"]
+                API[REST API]
+                AsyncRoutes[Async Routes]
+                Pydantic[Pydantic Schemas]
+            end
+
+            subgraph Django["Django WSGI /cp/*"]
+                Admin[Admin Interface]
+                ORM[ORM Models]
+                Migrations[Migrations]
+            end
+        end
+    end
+
+    Database[(PostgreSQL 17<br/>:5432)]
+
+    Client -->|HTTP/REST| Frontend
+    Frontend -->|API Calls| FastAPI
+    FastAPI -->|Queries| Database
+    Django -->|Schema Management| Database
+
+    style Frontend fill:#42b883
+    style Backend fill:#3776ab
+    style Database fill:#336791
 ```
 
 ## Hybrid Backend Design
@@ -208,36 +210,41 @@ PyNuxtBase uses **JWT (JSON Web Tokens)** with refresh tokens:
 
 ### Login Flow
 
-```
-Client                    Backend                   Database
-  │                         │                          │
-  ├─── POST /api/auth/login ──→                        │
-  │                         ├─── Verify credentials ───→
-  │                         ←─── User data ────────────┤
-  ←─── { accessToken,       │                          │
-        user }              │                          │
-  │    Set-Cookie:          │                          │
-       refreshToken         │                          │
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Backend
+    participant Database
+
+    Client->>Backend: POST /api/auth/login
+    Backend->>Database: Verify credentials
+    Database-->>Backend: User data
+    Backend-->>Client: { accessToken, user }
+    Backend-->>Client: Set-Cookie: refreshToken (httpOnly)
+
+    Note over Client: Access token stored in memory
+    Note over Client: Refresh token in httpOnly cookie
 ```
 
 ### Token Refresh Flow
 
 When access token expires:
 
-```
-Client                    Backend
-  │                         │
-  ├─── Request with         │
-  │    expired token ───────→
-  ←─── 401 Unauthorized ────┤
-  │                         │
-  ├─── POST /api/auth/refresh
-  │    Cookie: refreshToken →
-  ←─── { accessToken } ─────┤
-  │                         │
-  ├─── Retry original       │
-       request with new     │
-       token ───────────────→
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Backend
+
+    Client->>Backend: Request with expired token
+    Backend-->>Client: 401 Unauthorized
+
+    Client->>Backend: POST /api/auth/refresh<br/>(Cookie: refreshToken)
+    Backend-->>Client: { accessToken }
+
+    Client->>Backend: Retry original request<br/>with new access token
+    Backend-->>Client: Success response
+
+    Note over Client: Access token refreshed<br/>automatically
 ```
 
 ## Design System

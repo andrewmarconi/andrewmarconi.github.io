@@ -31,13 +31,13 @@ uv pip uninstall package-name
 uv pip freeze > requirements.txt
 
 # Run migrations
-python manage.py migrate
+uv run python manage.py migrate
 
 # Create superuser
-python manage.py createsuperuser
+uv run python manage.py createsuperuser
 
 # Start development server
-python main.py
+uv run python main.py
 
 # Code quality
 black .        # Format code
