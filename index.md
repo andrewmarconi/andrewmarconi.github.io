@@ -1,0 +1,36 @@
+---
+home: true
+
+layout: home
+
+hero:
+  name: Andrew
+  text: MARCONI
+  tagline: Most technology asks you to trust it.<br/>I help brands build the kind that earns it.
+  image:
+    src: /media/hero.svg
+    alt: A fingerprint of broken concentric arcs whose outer ridges continue as broadcast waves
+  icon:
+    src: /media/icon.svg
+    alt: VitePress Carbon
+
+features:
+  - icon: |
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9" /><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z" /></svg>
+    title: I write
+    details: About what credibility means when anything can be faked. A book, a Substack, and thirty years of field notes.
+    linkText: Read the Substack
+    link: https://trustmeimhuman.substack.com
+  - icon: |
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9" /><path d="m18 15 4-4" /><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" /></svg>
+    title: I build
+    details: Tools and experiments, shipped in the open. The plumbing interests me as much as the pitch.
+    linkText: See the repos
+    link: https://github.com/andrewmarconi
+  - icon: |
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg>
+    title: I advise
+    details: Brands that want trust they can prove, not just a vibe-check. That work happens at Five59 Labs.
+    linkText: Visit Five59 Labs
+    link: https://559labs.com
+---
